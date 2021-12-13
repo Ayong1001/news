@@ -1,30 +1,40 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <el-header>
+    <nav-bar-vue></nav-bar-vue>
+    </el-header>
+    <el-main class="main">
+      <router-view></router-view>
+    </el-main>
+    <el-footer>
+      <footer-vue></footer-vue>
+    </el-footer>
   </div>
-  <router-view/>
 </template>
 
+<script>
+import NavBarVue from "./views/nav/NavBar.vue"
+import FooterVue from "./views/footer/Footer.vue"
+
+export default {
+  components: {
+    NavBarVue,
+    FooterVue
+  },
+  mounted() {
+    this.$router.afterEach((to, from, next) => {
+      window.scrollTo(0, 0)
+    })
+  },
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  margin: 0;
+  padding: 0;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.main {
+  background-color: #f7f9ff;
 }
 </style>
